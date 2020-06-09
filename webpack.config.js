@@ -1,17 +1,26 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: [
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+        './src/index.js'
+    ]
+  },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html'
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin()
   ],
   module: {
     rules: [{
@@ -34,5 +43,6 @@ module.exports = {
     colors: true
   },
   devtool: 'source-map',
-  watch: true
+  watch: true,
+  mode: 'development'
 };
