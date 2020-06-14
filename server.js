@@ -18,11 +18,7 @@ app.use(
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.use(express.static('dist'))
-
-// app.get('/', (req, res) => {
-//     res.send('');
-// })
+app.use(express.static('public'))
 
 app.get('/', (req, res) =>
     res.sendFile(path.resolve(__dirname, './dist/index.html'))

@@ -17,10 +17,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './src/index.html'
+      template: './src/index.html',
+      title: 'sandbox'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin({ root: path.join(__dirname, 'dist') })
   ],
   module: {
     rules: [{
@@ -44,5 +45,9 @@ module.exports = {
   },
   devtool: 'source-map',
   watch: true,
-  mode: 'development'
+  mode: 'development',
+  devServer: {
+    contentBase: './src',
+    watchContentBase: true
+  },
 };
